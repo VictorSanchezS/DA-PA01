@@ -21,8 +21,8 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     }
 
     public Usuarios login(String user, String pass) {
-        Usuarios us = null;
-        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND pass = aes_encrypt(?, 'clave')";
+        Usuarios us = new Usuarios();
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND password = ? ";
         try {
             Connection con = CON.conectar();
             ps = con.prepareStatement(sql);
@@ -31,11 +31,10 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
             rs = ps.executeQuery();
             if (rs.next()) {
                 us = new Usuarios();
-                us.setIdUser(rs.getInt("id_user"));
-                //us.setIdempleado(rs.getInt("id_empleado"));
-                us.setUsuario(rs.getString("usuario"));
-                us.setPassword(rs.getString("pass"));
-                //us.setTipo(rs.getString("tipo"));
+                us.setIdUser(rs.getInt(1));
+                us.setNombre(rs.getString(2));
+                us.setUsuario(rs.getString(3));
+                us.setPassword(rs.getString(4));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
