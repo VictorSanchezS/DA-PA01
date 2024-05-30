@@ -74,7 +74,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuAlmacen.add(itemCargos);
 
-        itemAreas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         itemAreas.setText("Areas");
         itemAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +151,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAlmacenActionPerformed
 
     private void itemAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAreasActionPerformed
-        // TODO add your handling code here:
         FrmArea frm = new FrmArea();
         desktopPane.add(frm);
         frm.toFront();
