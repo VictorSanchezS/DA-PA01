@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import dominio.Cargos;
+import dominio.Cargo;
 import javax.swing.JOptionPane;
 import negocio.CargoControl;
 
@@ -15,12 +15,12 @@ import negocio.CargoControl;
 public class FrmCargo extends javax.swing.JInternalFrame {
 
     private final CargoControl CONTROL;
-    private Cargos obj;
+    private Cargo obj;
 
     public FrmCargo() {
         initComponents();
         CONTROL = new CargoControl();
-        obj = new Cargos();
+        obj = new Cargo();
         this.listar("");
         tabGeneral.setEnabledAt(1, false);
         txtId.setVisible(false);

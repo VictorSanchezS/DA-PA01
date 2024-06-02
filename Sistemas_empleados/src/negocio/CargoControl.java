@@ -1,7 +1,7 @@
 package negocio;
 
-import data.impl.CargosDaoImpl;
-import dominio.Cargos;
+import data.impl.CargoDaoImpl;
+import dominio.Cargo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -10,16 +10,16 @@ import data.CargosDao;
 public class CargoControl {
 
     private final CargosDao DATOS;
-    private Cargos obj;
+    private Cargo obj;
 
     public CargoControl() {
-        this.DATOS = new CargosDaoImpl();
-        this.obj = new Cargos();
+        this.DATOS = new CargoDaoImpl();
+        this.obj = new Cargo();
     }
     private DefaultTableModel modeloTabla;
 
     public DefaultTableModel listar(String texto) {
-        List<Cargos> lista = new ArrayList();
+        List<Cargo> lista = new ArrayList();
         lista.addAll(DATOS.listar(texto));
         //Establecemos la columna del tableModel
         String[] titulos = {"ID", "NOMBRE", "DESCRIPCION"};
@@ -29,7 +29,7 @@ public class CargoControl {
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
         //Recorrer toda mi lista y la pasare al DefaultTableModel
-        for (Cargos item : lista) {
+        for (Cargo item : lista) {
             registro[0] = Integer.toString(item.getId());
             registro[1] = item.getNombre();
             registro[2] = item.getDescripcion();
@@ -38,7 +38,7 @@ public class CargoControl {
         return this.modeloTabla;
     }
 
-    public String insertar(Cargos obj) {
+    public String insertar(Cargo obj) {
         if (DATOS.insertar(obj)) {
             return "OK";
         } else {
@@ -46,7 +46,7 @@ public class CargoControl {
         }
     }
 
-    public String actualizar(Cargos obj) {
+    public String actualizar(Cargo obj) {
         if (DATOS.actualizar(obj)) {
             return "OK";
         } else {
