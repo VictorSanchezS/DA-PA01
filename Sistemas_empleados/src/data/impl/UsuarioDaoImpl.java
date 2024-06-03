@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import data.UsuarioDao;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
@@ -15,6 +16,7 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     private final Conexion CON;
     private PreparedStatement ps;
     private ResultSet rs;
+    private boolean resp;
 
     public UsuarioDaoImpl() {
         this.CON = Conexion.getInstancia();
@@ -54,21 +56,86 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
 
     @Override
     public List<Usuarios> listar(String texto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Usuarios> registros = new ArrayList();    
+        try {
+            ps = CON.conectar().prepareStatement("Select * from usuarios where nombre like ?");
+            ps.setString(1, "%" + texto + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(new Usuarios(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getNString(4)));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al listar areas: "+ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return registros;
     }
 
     @Override
     public boolean insertar(Usuarios obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        resp = false;
+        try {
+            ps = CON.conectar().prepareStatement("INSERT INTO usuarios (nombre,usuario,password) VALUES (?,?,?)");
+            ps.setString(1, obj.getNombre());
+            ps.setString(2, obj.getUsuario());
+            ps.setString(3, obj.getPassword());
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al insertar usuarios: "+ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return resp;
     }
 
     @Override
     public boolean actualizar(Usuarios obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean resp = false;
+        try {
+            ps = CON.conectar().prepareStatement("UPDATE usuarios SET nombre=?, descripcion=? WHERE id=?");
+            ps.setString(1, obj.getNombre());
+            ps.setString(2, obj.getUsuario());
+            ps.setString(3, obj.getPassword());
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return resp;
     }
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean resp = false;
+        try {
+            ps = CON.conectar().prepareStatement("DELETE FROM usuarios WHERE id = ?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return resp;
+    }
+    
+    public static void main(String[] args) {
+        UsuarioDao datos = new UsuarioDaoImpl();
+        System.out.println(datos.listar("").size());
+        System.out.println(datos.listar("").get(0));
     }
 }
