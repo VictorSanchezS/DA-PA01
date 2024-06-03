@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< Updated upstream
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+=======
+>>>>>>> Stashed changes
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         <group/>
 =======
@@ -17,5 +21,14 @@
             <file>file:/C:/Users/walex/Desktop/SISTEMA_EMPL/PA01/Sistemas_empleados/src/dominio/Cargos.java</file>
         </group>
 >>>>>>> Stashed changes
+=======
+        <group>
+            <file>file:/C:/Users/USUARIO/OneDrive/Desktop/Ciclo_2024_I/Desarrollo_Aplicaciones/PA01/Sistemas_empleados/src/presentacion/FrmArea.java</file>
+            <file>file:/C:/Users/USUARIO/OneDrive/Desktop/Ciclo_2024_I/Desarrollo_Aplicaciones/PA01/Sistemas_empleados/src/data/impl/AreaDaoImpl.java</file>
+            <file>file:/C:/Users/USUARIO/OneDrive/Desktop/Ciclo_2024_I/Desarrollo_Aplicaciones/PA01/Sistemas_empleados/src/presentacion/FrmPrincipal.java</file>
+            <file>file:/C:/Users/USUARIO/OneDrive/Desktop/Ciclo_2024_I/Desarrollo_Aplicaciones/PA01/Sistemas_empleados/src/presentacion/FrmCargo.java</file>
+            <file>file:/C:/Users/USUARIO/OneDrive/Desktop/Ciclo_2024_I/Desarrollo_Aplicaciones/PA01/Sistemas_empleados/src/dominio/Area.java</file>
+        </group>
+>>>>>>> parent of 1eaf470 (Employee-Area-Job)
     </open-files>
 </project-private>
