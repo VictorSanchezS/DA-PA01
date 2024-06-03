@@ -30,7 +30,7 @@ public class AreaDaoImpl implements AreaDao<Area>{
 
     @Override
     public List<Area> listar(String texto) {
-        List<Area> registros = new ArrayList();
+        List<Area> registros = new ArrayList();    
         try {
             ps = CON.conectar().prepareStatement("Select * from areas where nombre like ?");
             ps.setString(1, "%" + texto + "%");

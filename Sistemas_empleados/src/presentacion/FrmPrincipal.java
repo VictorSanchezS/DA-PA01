@@ -50,8 +50,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itemCargos = new javax.swing.JMenuItem();
         itemAreas = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+<<<<<<< Updated upstream
         jMenuItem1 = new javax.swing.JMenuItem();
         itemEmpleados = new javax.swing.JMenuItem();
+=======
+        itemUsuario = new javax.swing.JMenuItem();
+>>>>>>> Stashed changes
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,14 +98,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< Updated upstream
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Usuarios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+=======
+        itemUsuario.setText("Usuarios");
+        itemUsuario.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> Stashed changes
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(itemUsuario);
 
         itemEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
         itemEmpleados.setText("Empleados");
@@ -150,9 +159,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void itemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemUsuarioActionPerformed
+        FrmUsuario frm = new FrmUsuario();
+        desktopPane.add(frm);
+        frm.toFront();
+        frm.setVisible(true);
+    }//GEN-LAST:event_itemUsuarioActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         
@@ -216,10 +228,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemAreas;
     private javax.swing.JMenuItem itemCargos;
+<<<<<<< Updated upstream
     private javax.swing.JMenuItem itemEmpleados;
+=======
+    private javax.swing.JMenuItem itemUsuario;
+>>>>>>> Stashed changes
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAlmacen;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
