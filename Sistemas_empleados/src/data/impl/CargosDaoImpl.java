@@ -1,7 +1,7 @@
 package data.impl;
 
 import database.Conexion;
-import dominio.Cargo;
+import dominio.Cargos;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,45 +9,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import data.CargosDao;
 
-public class CargoDaoImpl implements CargosDao<Cargo> {
+public class CargosDaoImpl implements CargosDao<Cargos> {
 
     private final Conexion CON;
     private PreparedStatement ps;
     private ResultSet rs;
     private boolean resp;
 
-    public CargoDaoImpl() {
+    public CargosDaoImpl() {
         CON = Conexion.getInstancia();
     }
     
     @Override
-    public List<Cargo> listar(String texto) {
-        List<Cargo> registros = new ArrayList();
+    public List<Cargos> listar(String texto) {
+        List<Cargos> registros = new ArrayList();
         try {
             ps = CON.conectar().prepareStatement("Select * from cargos where nombre like ?");
             ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                registros.add(new Cargo(rs.getInt(1), rs.getString(2),rs.getString(3)));
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            ps = null;
-            CON.desconectar();
-        }
-        return registros;
-    }
-    
-    public List<Cargo> seleccionar() {
-        List<Cargo> registros = new ArrayList();
-        try {
-            ps = CON.conectar().prepareStatement("Select id,nombre from cargos ORDER BY nombre ASC");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                registros.add(new Cargo(rs.getInt(1), rs.getString(2)));
+                registros.add(new Cargos(rs.getInt(1), rs.getString(2),rs.getString(3)));
             }
             ps.close();
             rs.close();
@@ -61,7 +42,7 @@ public class CargoDaoImpl implements CargosDao<Cargo> {
     }
 
     @Override
-    public boolean insertar(Cargo obj) {
+    public boolean insertar(Cargos obj) {
         resp = false;
         try {
             ps = CON.conectar().prepareStatement("INSERT INTO cargos (nombre,descripcion) VALUES (?,?)");
@@ -80,7 +61,7 @@ public class CargoDaoImpl implements CargosDao<Cargo> {
     }
     
     @Override
-    public boolean actualizar(Cargo obj) {
+    public boolean actualizar(Cargos obj) {
         boolean resp = false;
         try {
             ps = CON.conectar().prepareStatement("UPDATE cargos SET nombre=?, descripcion=? WHERE id=?");
@@ -119,5 +100,29 @@ public class CargoDaoImpl implements CargosDao<Cargo> {
     }
 
     
+    public static void main(String[] args) {
+        CargosDao datos = new CargosDaoImpl();
+        System.out.println(datos.listar("").size());
+        System.out.println(datos.listar("").get(0));
+    }
+    
+    public List<Cargos> seleccionar() {
+        List<Cargos> registros = new ArrayList();
+        try {
+            ps = CON.conectar().prepareStatement("Select id,nombre from cargos ORDER BY nombre ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(new Cargos(rs.getInt(1), rs.getString(2)));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return registros;
+    }
 
 }

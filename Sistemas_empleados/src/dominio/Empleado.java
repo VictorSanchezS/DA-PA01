@@ -39,6 +39,10 @@ public class Empleado {
         this.correo = correo;
     }
 
+    public Empleado(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 
     public int getId() {
         return id;
@@ -128,7 +132,10 @@ public class Empleado {
         this.correo = correo;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     
 }

@@ -11,19 +11,33 @@ package dominio;
 public class Usuarios {
     
    int idUser;
-   String nombre;
    String usuario;
    String password;
+   String tipoUsuario;
    
    public Usuarios(){
        
    }    
 
-    public Usuarios(int idUser, String nombre, String usuario, String password) {
+    public Usuarios(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+   
+   
+
+    public Usuarios(int idUser, String usuario, String password, String tipoUsuario) {
         this.idUser = idUser;
-        this.nombre = nombre;
         this.usuario = usuario;
         this.password = password;
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public int getIdUser() {
@@ -32,14 +46,6 @@ public class Usuarios {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getUsuario() {

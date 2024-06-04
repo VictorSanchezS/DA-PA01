@@ -13,17 +13,30 @@ import java.awt.Graphics;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPrincipal
-     */
-    public FrmPrincipal() {
+    private final String tipoUsuario;
+    
+    public FrmPrincipal(String tipoUsuario) {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setTitle("Sistema");
+        this.tipoUsuario = tipoUsuario;
         this.cargarOpcionesMenu();       
     }
+
     private void cargarOpcionesMenu(){
-       
+       if ("administrador".equals(tipoUsuario)) {
+            // Permitir acceso completo a todas las opciones de menú
+            menuAlmacen.setEnabled(true);
+            jMenu1.setEnabled(true);
+            menuPermisos.setEnabled(true);
+        } else if ("colaborador".equals(tipoUsuario)) {
+            // Bloquear acceso a ciertas opciones de menú para colaboradores
+            menuAlmacen.setEnabled(false);
+            //jMenu1.setEnabled(false);
+            itemUsuario.setEnabled(false);
+            itemEmpleado.setEnabled(true);
+            menuPermisos.setEnabled(false); // Bloquear todo el menú de Ventas
+        }
     }
 
 
@@ -50,13 +63,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itemCargos = new javax.swing.JMenuItem();
         itemAreas = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-<<<<<<< Updated upstream
-        jMenuItem1 = new javax.swing.JMenuItem();
-        itemEmpleados = new javax.swing.JMenuItem();
-=======
         itemUsuario = new javax.swing.JMenuItem();
->>>>>>> Stashed changes
-        jMenu2 = new javax.swing.JMenu();
+        itemEmpleado = new javax.swing.JMenuItem();
+        menuPermisos = new javax.swing.JMenu();
+        itemPermisos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +89,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuAlmacen.add(itemCargos);
 
-        itemAreas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         itemAreas.setText("Areas");
         itemAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,39 +107,41 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< Updated upstream
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("Usuarios");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-=======
         itemUsuario.setText("Usuarios");
         itemUsuario.addActionListener(new java.awt.event.ActionListener() {
->>>>>>> Stashed changes
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemUsuarioActionPerformed(evt);
             }
         });
         jMenu1.add(itemUsuario);
 
-        itemEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        itemEmpleados.setText("Empleados");
-        itemEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        itemEmpleado.setText("Empleados");
+        itemEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemEmpleadosActionPerformed(evt);
+                itemEmpleadoActionPerformed(evt);
             }
         });
-        jMenu1.add(itemEmpleados);
+        jMenu1.add(itemEmpleado);
 
         menuBar.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images/ventas.png"))); // NOI18N
-        jMenu2.setText("Ventas");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        menuPermisos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images/permiso.png"))); // NOI18N
+        menuPermisos.setText("Permisos");
+        menuPermisos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                menuPermisosActionPerformed(evt);
             }
         });
-        menuBar.add(jMenu2);
+
+        itemPermisos.setText("Permisos");
+        itemPermisos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPermisosActionPerformed(evt);
+            }
+        });
+        menuPermisos.add(itemPermisos);
+
+        menuBar.add(menuPermisos);
 
         setJMenuBar(menuBar);
 
@@ -156,6 +167,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCargosActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        FrmEmpleado frm = new FrmEmpleado();
+        desktopPane.add(frm);
+        frm.toFront();
+        frm.setVisible(true);
         
     }//GEN-LAST:event_jMenu1ActionPerformed
 
@@ -166,9 +181,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_itemUsuarioActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void menuPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPermisosActionPerformed
         
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    }//GEN-LAST:event_menuPermisosActionPerformed
 
     private void menuAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlmacenActionPerformed
         // TODO add your handling code here:
@@ -181,13 +196,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_itemAreasActionPerformed
 
-    private void itemEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmpleadosActionPerformed
-        // TODO add your handling code here:
-        FrmEmpleado frm = new FrmEmpleado(this);
+    private void itemEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmpleadoActionPerformed
+        FrmEmpleado frm = new FrmEmpleado();
         desktopPane.add(frm);
         frm.toFront();
         frm.setVisible(true);
-    }//GEN-LAST:event_itemEmpleadosActionPerformed
+    }//GEN-LAST:event_itemEmpleadoActionPerformed
+
+    private void itemPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPermisosActionPerformed
+        FrmPermiso frm = new FrmPermiso();
+        desktopPane.add(frm);
+        frm.toFront();
+        frm.setVisible(true);
+    }//GEN-LAST:event_itemPermisosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,7 +240,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal().setVisible(true);
+                //new FrmPrincipal().setVisible(true);
             }
         });
     }
@@ -228,15 +249,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemAreas;
     private javax.swing.JMenuItem itemCargos;
-<<<<<<< Updated upstream
-    private javax.swing.JMenuItem itemEmpleados;
-=======
+    private javax.swing.JMenuItem itemEmpleado;
+    private javax.swing.JMenuItem itemPermisos;
     private javax.swing.JMenuItem itemUsuario;
->>>>>>> Stashed changes
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu menuAlmacen;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuPermisos;
     // End of variables declaration//GEN-END:variables
 
 }

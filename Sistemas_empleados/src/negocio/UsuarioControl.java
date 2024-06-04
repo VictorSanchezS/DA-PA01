@@ -22,7 +22,7 @@ public class UsuarioControl {
         List<Usuarios> lista = new ArrayList();
         lista.addAll(DATOS.listar(texto));
         //Establecemos la columna del tableModel
-        String[] titulos = {"ID", "NOMBRE", "USUARIO","PASSWORD"};
+        String[] titulos = {"ID", "USUARIO","PASSWORD","TIPO USUARIO"};
         //Declaramos un vector que será el que agreguemos como registro al DefaultTableModel
         String[] registro = new String[4];
         //agrego los títulos al DefaultTableModel
@@ -31,14 +31,14 @@ public class UsuarioControl {
         //Recorrer toda mi lista y la pasare al DefaultTableModel
         for (Usuarios item : lista) {
             registro[0] = Integer.toString(item.getIdUser());
-            registro[1] = item.getNombre();
-            registro[2] = item.getUsuario();
-            registro[3] = item.getPassword();
+            registro[1] = item.getUsuario();
+            registro[2] = item.getPassword();
+            registro[3] = item.getTipoUsuario();
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
     }
-
+    
     public String insertar(Usuarios obj) {
         if (DATOS.insertar(obj)) {
             return "OK";

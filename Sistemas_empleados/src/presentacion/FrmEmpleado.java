@@ -5,7 +5,10 @@
 package presentacion;
 
 import dominio.Empleado;
+import dominio.Area;
+import dominio.Cargos;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import negocio.EmpleadoControl;
@@ -21,9 +24,8 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
     private boolean primeraCarga = true;
     public JFrame contenedor;
 
-    public FrmEmpleado(JFrame contenedor) {
+    public FrmEmpleado() {
         initComponents();
-        this.contenedor = contenedor;
         CONTROL = new EmpleadoControl();
         obj = new Empleado();
         this.listar("");
@@ -262,6 +264,11 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
         jLabel9.setText("Correo");
 
         cboTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "Passporte", "Carnet de Extranjeria" }));
+        cboTipoDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTipoDocumentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -387,33 +394,82 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
         //this.listar(txtBusqueda.getText(), false);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void limpiarFormulario() {
+    txtNombre.setText("");
+    txtApellido.setText("");
+    txtDocumento.setText("");
+    txtTelefono.setText("");
+    txtCorreo.setText("");
+    cboTipoDocumento.setSelectedIndex(0); // Selecciona el primer elemento por defecto
+    cboArea.setSelectedIndex(0); // Selecciona el primer elemento por defecto
+    cboCargo.setSelectedIndex(0); // Selecciona el primer elemento por defecto
+}
+
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // habilitamos el tab de mantenimiento
+         // Llama al método para limpiar el formulario
+        limpiarFormulario();
         this.verMantenimiento();
         btnGuardar.setVisible(true);
         btnActualizar.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    private void selectComboBoxItem(JComboBox<?> comboBox, Object value) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            if (comboBox.getItemAt(i).toString().equals(value.toString())) {
+                comboBox.setSelectedIndex(i);
+                return;
+            }
+        }
+    }
+    
+    private void inicializarFormulario() {
+    // Configurar el JComboBox para áreas
+    cboArea.setModel(CONTROL.seleccionarAreas());
+
+    // Configurar el JComboBox para cargos (asumiendo que tienes un método similar para cargos)
+    cboCargo.setModel(CONTROL.seleccionarCargos());
+
+    // Otras inicializaciones
+    cboTipoDocumento.setModel(new DefaultComboBoxModel<>(new String[]{"DNI", "Pasaporte", "Carnet de Extranjeria"}));
+    }
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        /*// Validar que el usuario ha seleccionado un registro
-        if (tablaListado.getSelectedRowCount() == 1) {
+      if (tablaListado.getSelectedRowCount() == 1) {
             String id = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 0));
             String nombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 1));
-
+            String apellido = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 2));
+            String tipoDoc = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),3));
+            String documento = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),4));
+            String areaNombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 6)); 
+            String cargoNombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 8));
+            String telefono = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),9));
+            String correo = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),10));
+            
+            
             txtId.setText(id);
             txtNombre.setText(nombre);
-
+            txtApellido.setText(apellido);
+            txtDocumento.setText(documento);
+            txtTelefono.setText(telefono);
+            txtCorreo.setText(correo);
+            
+            //para los Jcombo box
+            
+            cboTipoDocumento.setSelectedItem(tipoDoc);
+            selectComboBoxItem(cboArea, areaNombre);
+            selectComboBoxItem(cboCargo, cargoNombre);
+        
             this.verMantenimiento();
             btnGuardar.setVisible(false);
             btnActualizar.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"Seleccione una area ");
-        }*/
+            mensajeAdvertencia("Seleccione el registro a editar.");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        /*String resp;
-        // Validar que el usuario ha seleccionado un registro
+       String resp;
         if (tablaListado.getSelectedRowCount() == 1) {
             if (this.mensajePregunta("Desea eliminar el registro?") == 0) {
                 String id = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 0));
@@ -427,19 +483,36 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
             }
         } else {
             this.mensajeAdvertencia("Seleccione el registro a eliminar.");
-        }*/
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // Validar que el campo nombre no este vacío
-        /*String resp, nombre;
+         String resp, nombre, apellido, tipoDocumento, documento, telefono, correo;
+        Area area;
+        Cargos cargo;
         nombre = txtNombre.getText();
-
+        apellido = txtApellido.getText();
+        documento = txtDocumento.getText();
+        telefono = txtTelefono.getText();
+        correo = txtCorreo.getText();
+        tipoDocumento = (String) cboTipoDocumento.getSelectedItem();
+        area = (Area) cboArea.getSelectedItem();  // Obtener el objeto seleccionado
+        cargo = (Cargos) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
         if (nombre.length() == 0) {
             this.mensajeAdvertencia("Debes ingresar un nombre");
         }
         else {
             obj.setNombre(nombre);
+            obj.setApellido(apellido);
+            obj.setTipoDoc(tipoDocumento);
+            obj.setDocumento(documento);
+            obj.setTelefono(telefono);
+            obj.setCorreo(correo);
+
+            obj.setAreaId(area.getId());  // Si solo necesitas el ID del área
+            obj.setAreaNombre(area.getNombre());  // Si necesitas el nombre del área
+            obj.setCargoId(cargo.getId());  // Si solo necesitas el ID del cargo
+            obj.setCargoNombre(cargo.getNombre());
 
             resp = this.CONTROL.insertar(obj);
             if (resp.equals("OK")) {
@@ -450,30 +523,53 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
             } else {
                 this.mensajeError(resp);
             }
-        }*/
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // Cerrar el formulario de registro
-        /*this.verListado();
-        this.limpiar();*/
+        this.verListado();
+        this.limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // Validar que el campo nombre no este vacío
-        /*String resp;
         int id;
-        String nombre;
-
+        String resp, nombre, apellido, tipoDocumento, documento, telefono, correo;
+        Area area;
+        Cargos cargo;
+        
         id = Integer.parseInt(txtId.getText());
         nombre = txtNombre.getText();
-
+        apellido = txtApellido.getText();
+        documento = txtDocumento.getText();
+        telefono = txtTelefono.getText();
+        correo = txtCorreo.getText();
+        tipoDocumento = (String) cboTipoDocumento.getSelectedItem();
+        area = (Area) cboArea.getSelectedItem();  // Obtener el objeto seleccionado
+        cargo = (Cargos) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
+        
         if (nombre.length() == 0) {
             this.mensajeAdvertencia("Debes ingresar un nombre.");
-        }else {
+        } else if (apellido.length() == 0) {
+            this.mensajeAdvertencia("Debes ingresar un apellido.");
+        } else if (documento.length() == 0) {
+            this.mensajeAdvertencia("Debes ingresar un documento.");
+        } else if (telefono.length() == 0) {
+            this.mensajeAdvertencia("Debes ingresar un teléfono.");
+        } else if (correo.length() == 0) {
+            this.mensajeAdvertencia("Debes ingresar un correo.");
+        } else {
             obj.setId(id);
             obj.setNombre(nombre);
-
+            obj.setApellido(apellido);
+            obj.setDocumento(documento);
+            obj.setTelefono(telefono);
+            obj.setCorreo(correo);
+            obj.setTipoDoc(tipoDocumento);
+            obj.setAreaId(area.getId());  // Si solo necesitas el ID del área
+            obj.setAreaNombre(area.getNombre());  // Si necesitas el nombre del área
+            obj.setCargoId(cargo.getId());  // Si solo necesitas el ID del cargo
+            obj.setCargoNombre(cargo.getNombre());
+            
             resp = this.CONTROL.actualizar(obj);
             if (resp.equals("OK")) {
                 this.mensajeOK("Registro actualizado Correctamente");
@@ -483,8 +579,12 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, resp, "Sistema", JOptionPane.ERROR_MESSAGE);
             }
-        }*/
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void cboTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTipoDocumentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

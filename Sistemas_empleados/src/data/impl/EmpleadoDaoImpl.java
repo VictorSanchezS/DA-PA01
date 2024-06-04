@@ -137,4 +137,22 @@ public class EmpleadoDaoImpl implements EmpleadoDao<Empleado> {
         return resp;
     }
 
+    public List<Empleado> seleccionar() {
+        List<Empleado> registros = new ArrayList();
+        try {
+            ps = CON.conectar().prepareStatement("SELECT id, nombre FROM empleados ORDER BY nombre ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(new Empleado(rs.getInt(1), rs.getString(2)));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al listar areas: "+ex.getMessage());
+        } finally {
+            ps = null;
+            CON.desconectar();
+        }
+        return registros;
+    }
 }

@@ -1,23 +1,23 @@
 package dominio;
 
-public class Cargo {
+public class Cargos {
     //Atributos
     private int id;
     private String nombre;
     private String descripcion;
 
-    public Cargo() {
+    public Cargos() {
     }
     
-    public Cargo(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-    
-    public Cargo(int id, String nombre, String descripcion) {
+    public Cargos(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+    }
+
+    public Cargos(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
     public int getId() {
@@ -48,6 +48,7 @@ public class Cargo {
     public String toString() {
         return nombre;
     }
-
     
+    
+        
 }

@@ -7,5 +7,4 @@ public interface UsuarioDao<T> {
     public boolean insertar(T obj);
     public boolean actualizar(T obj);
     public boolean eliminar(int id);
-    
 }

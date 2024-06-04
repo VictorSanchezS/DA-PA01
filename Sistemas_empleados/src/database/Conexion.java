@@ -8,7 +8,7 @@ public class Conexion {
     //Valores para conectarnos a la base de datos
     private final String DRIVER = "com.mysql.jdbc.Driver";
     private final String URL = "jdbc:mysql://localhost:3306/";
-    private final String DB = "bdsisempl";
+    private final String DB = "basedatosempl2";
     private final String USUARIO = "root";
     private final String PASSWORD = "";
 
