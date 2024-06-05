@@ -5,7 +5,7 @@
 package presentacion;
 
 import data.impl.UsuarioDaoImpl;
-import dominio.Usuarios;
+import dominio.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class FrmLogin extends javax.swing.JFrame {
 
     UsuarioDaoImpl usersDao = new UsuarioDaoImpl();
-    Usuarios usu = new Usuarios();
+    Usuario usu = new Usuario();
     
     /**
      * Creates new form Login

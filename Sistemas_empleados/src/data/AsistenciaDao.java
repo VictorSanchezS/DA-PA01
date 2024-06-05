@@ -1,8 +1,10 @@
+
 package data;
 
 import java.util.List;
 
-public interface CargosDao<T> {
+
+public interface AsistenciaDao<T> {
     public List<T> listar(String texto);
     public boolean insertar(T obj);
     public boolean actualizar(T obj);

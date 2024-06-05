@@ -6,10 +6,10 @@ package negocio;
 
 import data.EmpleadoDao;
 import data.impl.AreaDaoImpl;
-import data.impl.CargosDaoImpl;
+import data.impl.CargoDaoImpl;
 import data.impl.EmpleadoDaoImpl;
 import dominio.Area;
-import dominio.Cargos;
+import dominio.Cargo;
 import dominio.Empleado;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +24,14 @@ public class EmpleadoControl {
 
     private final EmpleadoDao DATOS;
     private final AreaDaoImpl DATOSARE;
-    private final CargosDaoImpl DATOSCAR;
+    private final CargoDaoImpl DATOSCAR;
     private Empleado obj;
 
     public EmpleadoControl() {
         this.DATOS = new EmpleadoDaoImpl();
         this.obj = new Empleado();
         this.DATOSARE = new AreaDaoImpl();
-        this.DATOSCAR = new CargosDaoImpl();
+        this.DATOSCAR = new CargoDaoImpl();
     }
 
     private DefaultTableModel modeloTabla;
@@ -101,10 +101,10 @@ public class EmpleadoControl {
     
     public DefaultComboBoxModel seleccionarCargos(){
         DefaultComboBoxModel items= new DefaultComboBoxModel();
-        List<Cargos> lista=new ArrayList();
+        List<Cargo> lista=new ArrayList();
         lista=DATOSCAR.seleccionar();
-        for (Cargos item: lista){
-            items.addElement(new Cargos(item.getId(),item.getNombre()));
+        for (Cargo item: lista){
+            items.addElement(new Cargo(item.getId(),item.getNombre()));
         }
         return items;
     }

@@ -29,13 +29,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             menuAlmacen.setEnabled(true);
             jMenu1.setEnabled(true);
             menuPermisos.setEnabled(true);
+            
         } else if ("colaborador".equals(tipoUsuario)) {
             // Bloquear acceso a ciertas opciones de menú para colaboradores
             menuAlmacen.setEnabled(false);
             //jMenu1.setEnabled(false);
             itemUsuario.setEnabled(false);
             itemEmpleado.setEnabled(true);
-            menuPermisos.setEnabled(false); // Bloquear todo el menú de Ventas
+            menuPermisos.setEnabled(true); // Bloquear todo el menú de Ventas
         }
     }
 
@@ -67,6 +68,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itemEmpleado = new javax.swing.JMenuItem();
         menuPermisos = new javax.swing.JMenu();
         itemPermisos = new javax.swing.JMenuItem();
+        itemAsistencias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,6 +143,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuPermisos.add(itemPermisos);
 
+        itemAsistencias.setText("Asistencias");
+        itemAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAsistenciasActionPerformed(evt);
+            }
+        });
+        menuPermisos.add(itemAsistencias);
+
         menuBar.add(menuPermisos);
 
         setJMenuBar(menuBar);
@@ -210,6 +220,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_itemPermisosActionPerformed
 
+    private void itemAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAsistenciasActionPerformed
+        FrmAsistencia frm = new FrmAsistencia();
+        desktopPane.add(frm);
+        frm.toFront();
+        frm.setVisible(true);
+    }//GEN-LAST:event_itemAsistenciasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +265,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemAreas;
+    private javax.swing.JMenuItem itemAsistencias;
     private javax.swing.JMenuItem itemCargos;
     private javax.swing.JMenuItem itemEmpleado;
     private javax.swing.JMenuItem itemPermisos;

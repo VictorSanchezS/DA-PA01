@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2024 a las 06:27:50
+-- Tiempo de generación: 05-06-2024 a las 22:28:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bdsisempl`
+-- Base de datos: `basedatosempl2`
 --
 
 -- --------------------------------------------------------
@@ -147,7 +147,7 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `empleado_id`, `fecha_inicio`, `fecha_fin`, `tipo`, `descripcion`) VALUES
-(1, 1, '2024-06-03', '2024-06-04', 'Medico', 'Se le dio permiso medico');
+(2, 1, '2024-06-05', '2024-06-22', 'Salud 2sss', 'sssssssss');
 
 -- --------------------------------------------------------
 
@@ -157,20 +157,19 @@ INSERT INTO `permisos` (`id`, `empleado_id`, `fecha_inicio`, `fecha_fin`, `tipo`
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `tipo_usuario` enum('administrador','colaborador') NOT NULL DEFAULT 'colaborador'
+  `tipo_usuario` enum('administrador','colaborador') NOT NULL DEFAULT 'colaborador',
+  `salt` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `tipo_usuario`) VALUES
-(1, 'helio pizarro puentes', 'giuhel', '12345', 'colaborador'),
-(4, 'alexander', 'bvasquez', '15487', 'colaborador'),
-(5, 'bernal', 'bbbbbbbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbb4557878', 'colaborador');
+INSERT INTO `usuarios` (`id`, `usuario`, `password`, `tipo_usuario`, `salt`) VALUES
+(7, 'walter', 's7OFTX+xe9q8cVfhklCwFRz2cmyWHWEYoKBU0G4AAac=', 'administrador', 'UtkjbTbATSKcDJNbUwD/vw=='),
+(9, 'victor', '+6rYK259LE7CPik8ZmKzc3EG7LB4Va8pV0xL0dpbc1c=', 'colaborador', 'GXT1i68+f4dSjtUV9KTI6Q==');
 
 --
 -- Índices para tablas volcadas
@@ -237,7 +236,7 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT de la tabla `asistencias`
 --
 ALTER TABLE `asistencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `cargos`
@@ -261,13 +260,13 @@ ALTER TABLE `pagos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

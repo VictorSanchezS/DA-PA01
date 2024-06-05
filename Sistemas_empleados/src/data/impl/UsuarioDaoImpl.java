@@ -1,7 +1,7 @@
 package data.impl;
 
 import database.Conexion;
-import dominio.Usuarios;
+import dominio.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
+public class UsuarioDaoImpl implements UsuarioDao<Usuario> {
 
     private final Conexion CON;
     private PreparedStatement ps;
@@ -23,8 +23,8 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
         this.CON = Conexion.getInstancia();
     }
     
-    public Usuarios login(String user, String pass) {
-        Usuarios us = new Usuarios();
+    public Usuario login(String user, String pass) {
+        Usuario us = new Usuario();
         String sql = "SELECT * FROM usuarios WHERE usuario = ? ";
         try {
             Connection con = CON.conectar();
@@ -57,8 +57,8 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
         return us;
     }
 /*
-    public Usuarios login(String user, String pass) {
-        Usuarios us = new Usuarios();
+    public Usuario login(String user, String pass) {
+        Usuario us = new Usuario();
         String sql = "SELECT * FROM usuarios WHERE usuario = ? AND password = ? ";
         try {
             Connection con = CON.conectar();
@@ -93,8 +93,8 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     }
   */
     /*
-    public Usuarios login(String user, String pass) {
-        Usuarios us = new Usuarios();
+    public Usuario login(String user, String pass) {
+        Usuario us = new Usuario();
         String sql = "SELECT * FROM usuarios WHERE usuario = ? AND password = ? ";
         try {
             Connection con = CON.conectar();
@@ -126,14 +126,14 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     // Implement other methods from UsuarioDao if necessary
 
     @Override
-    public List<Usuarios> listar(String texto) {
-        List<Usuarios> registros = new ArrayList();    
+    public List<Usuario> listar(String texto) {
+        List<Usuario> registros = new ArrayList();    
         try {
             ps = CON.conectar().prepareStatement("Select * from usuarios where usuario like ?");
             ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                registros.add(new Usuarios(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getNString(4)));
+                registros.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getNString(4)));
             }
             ps.close();
             rs.close();
@@ -147,7 +147,7 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     }
 
     @Override
-    public boolean insertar(Usuarios obj) {
+    public boolean insertar(Usuario obj) {
         resp = false;
         try {
             
@@ -172,7 +172,7 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
         return resp;
     }
 
-    public boolean actualizar(Usuarios obj) {
+    public boolean actualizar(Usuario obj) {
         boolean resp = false;
         try {
             // Verificar si se proporcionó una nueva contraseña
@@ -213,7 +213,7 @@ public class UsuarioDaoImpl implements UsuarioDao<Usuarios> {
     
 /*
     @Override
-    public boolean actualizar(Usuarios obj) {
+    public boolean actualizar(Usuario obj) {
         boolean resp = false;
         try {
             byte[] salt = PasswordEncryptor.generateSalt();

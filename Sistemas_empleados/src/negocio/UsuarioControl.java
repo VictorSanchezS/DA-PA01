@@ -1,6 +1,6 @@
 package negocio;
 
-import dominio.Usuarios;
+import dominio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -10,16 +10,16 @@ import data.impl.UsuarioDaoImpl;
 public class UsuarioControl {
 
     private final UsuarioDao DATOS;
-    private Usuarios obj;
+    private Usuario obj;
 
     public UsuarioControl() {
         this.DATOS = new UsuarioDaoImpl();
-        this.obj = new Usuarios();
+        this.obj = new Usuario();
     }
     private DefaultTableModel modeloTabla;
 
     public DefaultTableModel listar(String texto) {
-        List<Usuarios> lista = new ArrayList();
+        List<Usuario> lista = new ArrayList();
         lista.addAll(DATOS.listar(texto));
         //Establecemos la columna del tableModel
         String[] titulos = {"ID", "USUARIO","PASSWORD","TIPO USUARIO"};
@@ -29,7 +29,7 @@ public class UsuarioControl {
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
         //Recorrer toda mi lista y la pasare al DefaultTableModel
-        for (Usuarios item : lista) {
+        for (Usuario item : lista) {
             registro[0] = Integer.toString(item.getIdUser());
             registro[1] = item.getUsuario();
             registro[2] = item.getPassword();
@@ -39,7 +39,7 @@ public class UsuarioControl {
         return this.modeloTabla;
     }
     
-    public String insertar(Usuarios obj) {
+    public String insertar(Usuario obj) {
         if (DATOS.insertar(obj)) {
             return "OK";
         } else {
@@ -47,7 +47,7 @@ public class UsuarioControl {
         }
     }
 
-    public String actualizar(Usuarios obj) {
+    public String actualizar(Usuario obj) {
         if (DATOS.actualizar(obj)) {
             return "OK";
         } else {

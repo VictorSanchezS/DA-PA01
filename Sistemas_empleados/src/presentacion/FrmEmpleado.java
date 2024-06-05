@@ -6,7 +6,7 @@ package presentacion;
 
 import dominio.Empleado;
 import dominio.Area;
-import dominio.Cargos;
+import dominio.Cargo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -489,7 +489,7 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
          String resp, nombre, apellido, tipoDocumento, documento, telefono, correo;
         Area area;
-        Cargos cargo;
+        Cargo cargo;
         nombre = txtNombre.getText();
         apellido = txtApellido.getText();
         documento = txtDocumento.getText();
@@ -497,9 +497,26 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
         correo = txtCorreo.getText();
         tipoDocumento = (String) cboTipoDocumento.getSelectedItem();
         area = (Area) cboArea.getSelectedItem();  // Obtener el objeto seleccionado
-        cargo = (Cargos) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
-        if (nombre.length() == 0) {
+        cargo = (Cargo) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
+        if (nombre.isEmpty()) {
             this.mensajeAdvertencia("Debes ingresar un nombre");
+            return;
+        }
+        if (apellido.isEmpty()) {
+            this.mensajeAdvertencia("Debes ingresar un apellido");
+            return;
+        }
+        if (documento.isEmpty()) {
+            this.mensajeAdvertencia("Debes ingresar un documento");
+            return;
+        }
+        if (telefono.isEmpty()) {
+            this.mensajeAdvertencia("Debes ingresar un telefono");
+            return;
+        }
+        if (correo.isEmpty()) {
+            this.mensajeAdvertencia("Debes ingresar un correo");
+            return;
         }
         else {
             obj.setNombre(nombre);
@@ -535,7 +552,7 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
         int id;
         String resp, nombre, apellido, tipoDocumento, documento, telefono, correo;
         Area area;
-        Cargos cargo;
+        Cargo cargo;
         
         id = Integer.parseInt(txtId.getText());
         nombre = txtNombre.getText();
@@ -545,7 +562,7 @@ public class FrmEmpleado extends javax.swing.JInternalFrame {
         correo = txtCorreo.getText();
         tipoDocumento = (String) cboTipoDocumento.getSelectedItem();
         area = (Area) cboArea.getSelectedItem();  // Obtener el objeto seleccionado
-        cargo = (Cargos) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
+        cargo = (Cargo) cboCargo.getSelectedItem();  // Obtener el objeto seleccionado
         
         if (nombre.length() == 0) {
             this.mensajeAdvertencia("Debes ingresar un nombre.");

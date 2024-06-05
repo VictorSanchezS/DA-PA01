@@ -4,7 +4,6 @@
  */
 package data.impl;
 
-import java.util.Date;
 import data.PermisoDao;
 import database.Conexion;
 import dominio.Permiso;

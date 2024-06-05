@@ -17,6 +17,7 @@ import negocio.PermisoControl;
  *
  * @author jcarlosad7
  */
+
 public class FrmPermiso extends javax.swing.JInternalFrame {
 
     private final PermisoControl CONTROL;
@@ -604,6 +605,7 @@ public class FrmPermiso extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jcFechaFinPropertyChange
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

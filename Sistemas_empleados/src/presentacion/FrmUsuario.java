@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import dominio.Usuarios;
+import dominio.Usuario;
 import java.util.List;
 import javax.swing.JOptionPane;
 import negocio.UsuarioControl;
@@ -16,12 +16,12 @@ import negocio.UsuarioControl;
 public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private final UsuarioControl CONTROL;
-    private Usuarios obj;
+    private Usuario obj;
     
     public FrmUsuario() {
         initComponents();
         CONTROL = new UsuarioControl();
-        obj = new Usuarios();
+        obj = new Usuario();
         this.listar("");
         tabGeneral.setEnabledAt(1, false);
         txtId.setVisible(false);

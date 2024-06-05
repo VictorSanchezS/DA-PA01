@@ -8,24 +8,24 @@ package dominio;
  *
  * @author walex
  */
-public class Usuarios {
+public class Usuario {
     
    int idUser;
    String usuario;
    String password;
    String tipoUsuario;
    
-   public Usuarios(){
+   public Usuario(){
        
    }    
 
-    public Usuarios(String tipoUsuario) {
+    public Usuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
    
    
 
-    public Usuarios(int idUser, String usuario, String password, String tipoUsuario) {
+    public Usuario(int idUser, String usuario, String password, String tipoUsuario) {
         this.idUser = idUser;
         this.usuario = usuario;
         this.password = password;
