@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2024 a las 22:28:58
+-- Tiempo de generación: 10-06-2024 a las 23:24:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -55,8 +55,19 @@ CREATE TABLE `asistencias` (
   `empleado_id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora_entrada` time NOT NULL,
-  `hora_salida` time NOT NULL
+  `hora_salida` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `asistencias`
+--
+
+INSERT INTO `asistencias` (`id`, `empleado_id`, `fecha`, `hora_entrada`, `hora_salida`) VALUES
+(7, 1, '2024-06-08', '16:50:00', '16:51:00'),
+(8, 2, '2024-06-08', '19:15:54', '19:15:54'),
+(10, 2, '2024-06-08', '19:13:38', '19:20:00'),
+(11, 1, '2024-06-10', '00:07:28', '12:50:00'),
+(12, 2, '2024-06-10', '00:14:04', '00:14:04');
 
 -- --------------------------------------------------------
 
@@ -169,7 +180,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `usuario`, `password`, `tipo_usuario`, `salt`) VALUES
 (7, 'walter', 's7OFTX+xe9q8cVfhklCwFRz2cmyWHWEYoKBU0G4AAac=', 'administrador', 'UtkjbTbATSKcDJNbUwD/vw=='),
-(9, 'victor', '+6rYK259LE7CPik8ZmKzc3EG7LB4Va8pV0xL0dpbc1c=', 'colaborador', 'GXT1i68+f4dSjtUV9KTI6Q==');
+(9, 'victor', '+6rYK259LE7CPik8ZmKzc3EG7LB4Va8pV0xL0dpbc1c=', 'colaborador', 'GXT1i68+f4dSjtUV9KTI6Q=='),
+(10, 'manuel', 'manuel', 'administrador', 'GXT1i68+f4dSjtUV9KTI67Q==');
 
 --
 -- Índices para tablas volcadas
@@ -236,7 +248,7 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT de la tabla `asistencias`
 --
 ALTER TABLE `asistencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `cargos`
@@ -266,7 +278,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

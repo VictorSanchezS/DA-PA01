@@ -68,7 +68,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itemEmpleado = new javax.swing.JMenuItem();
         menuPermisos = new javax.swing.JMenu();
         itemPermisos = new javax.swing.JMenuItem();
-        itemAsistencias = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        itemEntradas = new javax.swing.JMenuItem();
+        itemSalidas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,15 +145,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuPermisos.add(itemPermisos);
 
-        itemAsistencias.setText("Asistencias");
-        itemAsistencias.addActionListener(new java.awt.event.ActionListener() {
+        menuBar.add(menuPermisos);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images/asistencia.png"))); // NOI18N
+        jMenu2.setText("Asistencias");
+
+        itemEntradas.setText("Entradas");
+        itemEntradas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAsistenciasActionPerformed(evt);
+                itemEntradasActionPerformed(evt);
             }
         });
-        menuPermisos.add(itemAsistencias);
+        jMenu2.add(itemEntradas);
 
-        menuBar.add(menuPermisos);
+        itemSalidas.setText("Salidas");
+        itemSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSalidasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemSalidas);
+
+        menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
 
@@ -220,12 +235,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_itemPermisosActionPerformed
 
-    private void itemAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAsistenciasActionPerformed
-        FrmAsistencia frm = new FrmAsistencia();
+    private void itemEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEntradasActionPerformed
+        // TODO add your handling code here:
+        FrmAsistenciaEntrada frm = new FrmAsistenciaEntrada();
         desktopPane.add(frm);
         frm.toFront();
         frm.setVisible(true);
-    }//GEN-LAST:event_itemAsistenciasActionPerformed
+    }//GEN-LAST:event_itemEntradasActionPerformed
+
+    private void itemSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalidasActionPerformed
+        // TODO add your handling code here:
+        FrmAsistenciaSalida frm = new FrmAsistenciaSalida();
+        desktopPane.add(frm);
+        frm.toFront();
+        frm.setVisible(true);
+    }//GEN-LAST:event_itemSalidasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,12 +289,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemAreas;
-    private javax.swing.JMenuItem itemAsistencias;
     private javax.swing.JMenuItem itemCargos;
     private javax.swing.JMenuItem itemEmpleado;
+    private javax.swing.JMenuItem itemEntradas;
     private javax.swing.JMenuItem itemPermisos;
+    private javax.swing.JMenuItem itemSalidas;
     private javax.swing.JMenuItem itemUsuario;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu menuAlmacen;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuPermisos;

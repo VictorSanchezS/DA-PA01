@@ -31,31 +31,38 @@ public class AsistenciaControl {
     private DefaultTableModel modeloTabla;
     
     public DefaultTableModel listar(String texto) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 
-        List<Asistencia> lista = new ArrayList<>();
-        lista.addAll(DATOS.listar(texto));
-        // Establecemos la columna del tableModel
-        String[] titulos = {"ID", "EMPLEADO ID", "EMPLEADO NOMBRE", "FECHA", "HORA ENTRADA", "HORA SALIDA"};
-        // Declaramos un vector que será el que agreguemos como registro al DefaultTableModel
-        String[] registro = new String[6]; // Cambiado a 7 para que coincida con el número de títulos
-        // Agrego los títulos al DefaultTableModel
-        this.modeloTabla = new DefaultTableModel(null, titulos);
+    List<Asistencia> lista = new ArrayList<>();
+    lista.addAll(DATOS.listar(texto));
+    // Establecemos la columna del tableModel
+    String[] titulos = {"ID", "EMPLEADO ID", "EMPLEADO NOMBRE", "FECHA", "HORA ENTRADA", "HORA SALIDA"};
+    // Declaramos un vector que será el que agreguemos como registro al DefaultTableModel
+    String[] registro = new String[6]; // Debe ser 6 para coincidir con el número de títulos
+    // Agrego los títulos al DefaultTableModel
+    this.modeloTabla = new DefaultTableModel(null, titulos);
 
-        // Recorrer toda mi lista y la pasare al DefaultTableModel
-        for (Asistencia item : lista) {
-            registro[0] = Integer.toString(item.getId());
-            registro[1] = Integer.toString(item.getEmpleadoId());
-            registro[2] = item.getEmpleadoNombre();
-            registro[3] = formatter.format(item.getFecha());
-            registro[4] = timeFormatter.format(item.getHoraEntrada());
+    // Recorrer toda mi lista y la pasare al DefaultTableModel
+    for (Asistencia item : lista) {
+        registro[0] = Integer.toString(item.getId());
+        registro[1] = Integer.toString(item.getEmpleadoId());
+        registro[2] = item.getEmpleadoNombre();
+        registro[3] = formatter.format(item.getFecha());
+        registro[4] = timeFormatter.format(item.getHoraEntrada());
+
+        // Verificar si la hora de salida es nula antes de formatear
+        if (item.getHoraSalida() != null) {
             registro[5] = timeFormatter.format(item.getHoraSalida());
-
-            this.modeloTabla.addRow(registro);
+        } else {
+            registro[5] = ""; // Asignar una cadena vacía si la hora de salida es nula
         }
-        return this.modeloTabla;
+
+        this.modeloTabla.addRow(registro);
     }
+    return this.modeloTabla;
+}
+
     
      public String insertar(Asistencia obj) {
         if (DATOS.insertar(obj)) {

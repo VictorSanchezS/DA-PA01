@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
 import negocio.PermisoControl;
 
 /**
@@ -35,6 +36,8 @@ public class FrmPermiso extends javax.swing.JInternalFrame {
 
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
+        TableRowSorter orden = new TableRowSorter(tablaListado.getModel());
+        tablaListado.setRowSorter(orden);
     }
 
     private void selectComboBoxItem(JComboBox<?> comboBox, Object value) {

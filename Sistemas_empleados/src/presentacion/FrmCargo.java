@@ -6,6 +6,7 @@ package presentacion;
 
 import dominio.Cargo;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
 import negocio.CargoControl;
 
 /**
@@ -28,6 +29,8 @@ public class FrmCargo extends javax.swing.JInternalFrame {
 
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
+        TableRowSorter orden = new TableRowSorter(tablaListado.getModel());
+        tablaListado.setRowSorter(orden);
     }
 
     private void limpiar() {

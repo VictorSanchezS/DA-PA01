@@ -16,6 +16,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
+import javax.swing.table.TableRowSorter;
 
 public class FrmAsistencia extends javax.swing.JInternalFrame {
 
@@ -36,6 +37,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
+        TableRowSorter orden = new TableRowSorter(tablaListado.getModel());
+        tablaListado.setRowSorter(orden);
     }
 
     private void selectComboBoxItem(JComboBox<?> comboBox, Object value) {

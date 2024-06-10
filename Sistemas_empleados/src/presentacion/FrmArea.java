@@ -6,6 +6,7 @@ package presentacion;
 
 import dominio.Area;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
 import negocio.AreaControl;
 
 /**
@@ -30,6 +31,8 @@ public class FrmArea extends javax.swing.JInternalFrame {
      */
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
+        TableRowSorter orden = new TableRowSorter(tablaListado.getModel());
+        tablaListado.setRowSorter(orden);
     }
 
     private void limpiar() {

@@ -7,6 +7,7 @@ package presentacion;
 import dominio.Usuario;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
 import negocio.UsuarioControl;
 
 /**
@@ -31,6 +32,8 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
      */
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
+        TableRowSorter orden = new TableRowSorter(tablaListado.getModel());
+        tablaListado.setRowSorter(orden);
     }
 
     private void limpiar() {
